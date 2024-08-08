@@ -5,21 +5,9 @@ import Card from './Card'
 const api_key = 'DEMO_KEY'
 const URL = `https://api.nasa.gov/planetary/apod?api_key=${api_key}`
 
-function Card ({}) {
-  return {
-    <div className='card'>
-    <h2>(apod.title)</h2>
-    <p>{apod.explanation}</p>
-    <figure>
-    <img src={apod.url} />
-    <figcaption>Awesome pic taken on (apod.date} </figcaption>
-    </figure>
-    </div>
-  }
-}
-
 function App() {
   const [apod, setApod] = useState()
+
   useEffect(() => {
     function fetchPhoto() {
 axios.get(URL)
@@ -42,17 +30,21 @@ axios.get(URL)
         "url": "https://apod.nasa.gov/apod/image/2408/LarsMilkyWay_Larnaout_960.jpg"
        })
   }, [])
+
   if (!apod) return 'Fetching Photo of the Day...'
   return (
-   <section>
-    <Card
-      title={apod.title}
-      text={apod.description}
-      imageURL={apod.url}
-      data={apod.data}
-    />
+    <section>
+   <Card
+   title={apod.title}
+   text={apod.explanation}
+   imageURL={apod.url}
+   date={apod.date}
+   />
    </section>
   )
 }
 
-export default App
+
+
+
+export default App;
